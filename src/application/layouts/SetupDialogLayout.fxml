@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="270.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="application.SetupDialogLayoutController">
+   <children>
+      <Button fx:id="btnIniciar" layoutX="192.0" layoutY="214.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="42.0" prefWidth="97.0" text="Iniciar">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="208.0" layoutY="25.0" text="Setup">
+         <font>
+            <Font name="Consolas Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="110.0" text="Capacidade do trem">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCapDeposito" alignment="CENTER" layoutX="249.0" layoutY="69.0" />
+      <TextField fx:id="tfCapTrem" alignment="CENTER" layoutX="249.0" layoutY="106.0" />
+      <Label fx:id="lblErro" layoutX="33.0" layoutY="177.0" textFill="#e40a0a">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="73.0" text="Capacidade do depósito">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="147.0" text="Tempo de viagem do trem">
+         <font>
+            <Font name="Consolas" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfTempoViagem" alignment="CENTER" layoutX="249.0" layoutY="143.0" />
+   </children>
+</AnchorPane>

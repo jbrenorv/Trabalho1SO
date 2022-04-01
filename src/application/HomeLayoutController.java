@@ -3,14 +3,22 @@ package application;
 import static application.Main.getId;
 import static application.Main.ids;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class HomeLayoutController implements Initializable {
 
@@ -52,7 +60,29 @@ public class HomeLayoutController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/layouts/SetupDialogLayout.fxml"));
+		SetupDialogLayoutController setupController = null;
+
+		try {
+			Parent parent = fxmlLoader.load();
+			setupController = fxmlLoader.<SetupDialogLayoutController>getController();
+			Scene scene = new Scene(parent, 480, 270);
+			Stage stage = new Stage();
+
+			stage.initStyle(StageStyle.UTILITY);
+			stage.setOnCloseRequest(e -> {
+				Platform.exit();
+				System.exit(0);
+			});
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(scene);
+			stage.showAndWait();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println(setupController.getM());
+		}
 
 	}
 
