@@ -211,10 +211,16 @@
                                     <Font name="Consolas Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tfTempoDeEmpacotamento" layoutX="350.0" layoutY="83.0" />
-                              <Label layoutX="102.0" layoutY="82.0" text="Tempo de Empacotamento">
+                              <TextField fx:id="tfNomeEmpacotador" layoutX="180.0" layoutY="83.0" />
+                              <Label layoutX="22.0" layoutY="82.0" text="Nome do Empacotador">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfTempoDeEmpacotamento" layoutX="535.0" layoutY="83.0" />
+                              <Label layoutX="352.0" layoutY="82.0" text="Tempo de Empacotamento">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
                               <Button fx:id="btCriarEmpacotador" layoutX="300.0" layoutY="142.0" mnemonicParsing="false" onAction="#criarEmpacotador" text="Criar" />

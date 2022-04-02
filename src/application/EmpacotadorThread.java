@@ -14,16 +14,18 @@ public class EmpacotadorThread extends Thread {
 
 	private final Pane node;
 	private final int id;
+	private final String nome;
 	private final int te;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 
-	public EmpacotadorThread(int id, Pane node, int te) {
+	public EmpacotadorThread(int id, Pane node, String nome, int te) {
 		super("Emp." + String.valueOf(id));
 
 		node.setVisible(true);
 
 		this.node = node;
 		this.id = id;
+		this.nome = nome;
 		this.te = te * 1000; // transforma o tempo inserido de segundos em milissegundos
 	}
 
@@ -33,7 +35,7 @@ public class EmpacotadorThread extends Thread {
 			empacotar();
 			
 			if (Semaforo.posVazias.availablePermits() == 0) {
-				System.out.println(this.id + " dormiu!");
+				System.out.println(this.nome + "(id." + this.id + ") dormiu!");
 			}
 			try {
 				Semaforo.posVazias.acquire();
@@ -61,7 +63,7 @@ public class EmpacotadorThread extends Thread {
 		ImageView iv = (ImageView) node.getChildren().get(2);
 
 		Platform.runLater(() -> {
-			lb.setText("Emp...");
+			lb.setText(this.nome);
 		});
 
 		new AnimationTimer() {
@@ -95,12 +97,12 @@ public class EmpacotadorThread extends Thread {
 			}
 
 		}.start();
-
+		System.out.println(this.nome + "(id." + this.id + ") começou a empacotar.");
 		long tempoPacote = System.currentTimeMillis() + this.te;
 		while (System.currentTimeMillis() < tempoPacote) {
-			for(int i=0;i<100;i++) {};
+//			for(int i=0;i<100;i++) {};
 		};
-		System.out.println(this.id + " terminou de empacotar.");
+		System.out.println(this.nome + "(id." + this.id + ") terminou de empacotar.");
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
 	
@@ -108,7 +110,7 @@ public class EmpacotadorThread extends Thread {
 		
 		if (Deposito.qtdAtual >= 0) {
 			Deposito.qtdAtual++;
-			System.out.println(this.id + " carregou o pacote no depósito. Agora existem " + Deposito.qtdAtual);
+			System.out.println(this.nome + "(id." + this.id + ") carregou o depósito. Total: " + Deposito.qtdAtual + " pacotes carregados.");
 		}
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
