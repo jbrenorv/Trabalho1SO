@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +18,7 @@
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="1280.0">
+            <Pane prefHeight="250.0" prefWidth="1280.0">
                <children>
                   <VBox fx:id="vbEmp0" layoutX="8.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
                      <children>
@@ -191,11 +192,11 @@
                   </Label>
                </children>
             </Pane>
-            <Pane prefHeight="240.0" prefWidth="1280.0">
+            <Pane prefHeight="200.0" prefWidth="1280.0">
                <children>
-                  <HBox prefHeight="240.0" prefWidth="1280.0">
+                  <HBox prefHeight="200.0" prefWidth="1280.0">
                      <children>
-                        <Pane prefHeight="240.0" prefWidth="640.0">
+                        <Pane prefHeight="200.0" prefWidth="640.0">
                            <children>
                               <Label alignment="CENTER" layoutX="208.0" layoutY="14.0" text="Criar Empacotador" textAlignment="CENTER">
                                  <font>
@@ -213,11 +214,7 @@
                         </Pane>
                         <Pane prefHeight="240.0" prefWidth="640.0">
                            <children>
-                              <Label layoutX="300.0" layoutY="103.0" text="Log">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <TextArea fx:id="taLog" prefHeight="200.0" prefWidth="640.0" />
                            </children>
                         </Pane>
                      </children>
