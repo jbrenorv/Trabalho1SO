@@ -58,6 +58,12 @@ public class HomeLayoutController implements Initializable {
 	@FXML
 	private VBox vbEmp9;
 
+	@FXML
+	private VBox vbTrem;
+	
+	@FXML
+	private VBox vbDepo;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/layouts/SetupDialogLayout.fxml"));
@@ -82,6 +88,10 @@ public class HomeLayoutController implements Initializable {
 			e.printStackTrace();
 		} finally {
 			System.out.println(setupController.getM());
+			criarTrem();
+			System.out.println("trem criado");
+			criarDeposito();
+			System.out.println("deposito criado");
 		}
 
 	}
@@ -141,5 +151,17 @@ public class HomeLayoutController implements Initializable {
 			btCriarEmpacotador.setDisable(true);
 		}
 	}
-
+	
+	void criarTrem() {
+		int n = SetupDialogLayoutController.getN();
+		int tv = SetupDialogLayoutController.getTv();
+		
+		TremThread trem = new TremThread(vbTrem, tv, n);
+	}
+	
+	void criarDeposito() {
+		int m = SetupDialogLayoutController.getM();
+		
+		Deposito deposito = new Deposito(vbDepo, m, 0);
+	}
 }

@@ -14,23 +14,24 @@ public class TremThread extends Thread {
 
 	private final Pane node;
 	private final int tv;
-	private final int N;
+	private final int n;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 
-	public TremThread(Pane node, int tv, int N) {
+	public TremThread(Pane node, int tv, int n) {
 		super("Trem");
 
 		node.setVisible(true);
 
 		this.node = node;
 		this.tv = tv * 1000; // transforma o tempo inserido de segundos em milissegundos
-		this.N = N;
+		this.n = n;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			for (int i = 0; i < this.N; i++) {
+			System.out.println("trem running");
+			for (int i = 0; i < this.n; i++) {
 				if (Semaforo.posCheias.availablePermits() == 0) {
 					System.out.println("Trem dormiu!");
 				}
@@ -60,60 +61,16 @@ public class TremThread extends Thread {
 			Deposito.qtdAtual--;
 			System.out.println("Trem recebeu o pacote do depósito.");
 		}
-		
-		// codigo que já tinha antes na função do empacotador
-		/* long it = System.nanoTime();
-		String prefix = "/application/images/emp";
-
-		Label lb = (Label) node.getChildren().get(0);
-		ProgressBar pb = (ProgressBar) node.getChildren().get(1);
-		ImageView iv = (ImageView) node.getChildren().get(2);
-
-		Platform.runLater(() -> {
-			lb.setText("Emp...");
-		});
-
-		new AnimationTimer() {
-			int imageId = 0;
-			long pt = 0;
-
-			@Override
-			public void handle(long ct) {
-				// tempo decorrido desde o inicio em ms
-				ct = (long) ((ct - it) / 1000000.0);
-
-				double progress = Math.min(ct / (tv * 1.0), 1.0);
-				pb.setProgress(progress);
-
-				// muda a imagem a cada 200ms
-				if ((ct - pt) > 200) {
-					Image sprite;
-					String url = prefix + imageId + ".png";
-					if (!images.containsKey(url))
-						images.put(url, new Image(url, 40, 64, false, false));
-					sprite = images.get(url);
-					iv.setImage(sprite);
-
-					imageId = (imageId + 1) % 3;
-					pt = ct;
-				}
-
-				if (progress >= 1) {
-					this.stop();
-				}
-			}
-
-		}.start(); */
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
 
 	public void viajar() {
-		long tempoIda = System.nanoTime() + (this.tv); // viagem de ida
+		long tempoIda = System.currentTimeMillis() + this.tv; // viagem de ida
 		System.out.println("Trem iniciou a viagem.");
-		while (System.nanoTime() < tempoIda) {};
-		long tempoVolta = System.nanoTime() + (this.tv); // viagem de ida
+		while (System.currentTimeMillis() < tempoIda) {};
+		long tempoVolta = System.currentTimeMillis() + this.tv; // viagem de ida
 		System.out.println("Trem chegou ao destino.");
-		while (System.nanoTime() < tempoVolta) {};
+		while (System.currentTimeMillis() < tempoVolta) {};
 		System.out.println("Trem terminou a viagem.");
 		
 		// codigo que já tinha antes na função do empacotador

@@ -30,9 +30,10 @@ public class EmpacotadorThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
+			System.out.println("empacotador running");
 			empacotar();
 			
-			if (Semaforo.posCheias.availablePermits() == 0) {
+			if (Semaforo.posVazias.availablePermits() == 0) {
 				System.out.println(this.id + " dormiu!");
 			}
 			try {
@@ -45,17 +46,22 @@ public class EmpacotadorThread extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println("não dormiu");
 			carregarPacote();
-			
+			System.out.println("carregou");
 			Semaforo.mutex.release();
 			Semaforo.posCheias.release();
 		}
 	}
 
 	public void empacotar() {
-		long tempoPacote = System.nanoTime() + this.te;
+		System.out.println("te: " + this.te);
+		long tempoPacote = System.currentTimeMillis() + this.te;
+		System.out.println("tempoPacote:" + tempoPacote);
 		System.out.println(this.id + " começou a empacotar.");
-		while (System.nanoTime() < tempoPacote) {};
+		while (System.currentTimeMillis() < tempoPacote) {
+			for(int i=0;i<100;i++) {};
+		};
 		System.out.println(this.id + " terminou de empacotar.");
 		
 		long it = System.nanoTime();
@@ -106,55 +112,10 @@ public class EmpacotadorThread extends Thread {
 	
 	public void carregarPacote() {
 		
-		if (Deposito.qtdAtual <= 0) {
+		if (Deposito.qtdAtual >= 0) {
 			Deposito.qtdAtual++;
-			System.out.println(this.id + " carregou o pacote no depósito.");
+			System.out.println(this.id + " carregou o pacote no depósito. Agora existem " + Deposito.qtdAtual);
 		}
-		
-		// codigo que já tinha antes na função do empacotador
-		/* long it = System.nanoTime();
-		String prefix = "/application/images/emp";
-
-		Label lb = (Label) node.getChildren().get(0);
-		ProgressBar pb = (ProgressBar) node.getChildren().get(1);
-		ImageView iv = (ImageView) node.getChildren().get(2);
-
-		Platform.runLater(() -> {
-			lb.setText("Emp...");
-		});
-
-		new AnimationTimer() {
-			int imageId = 0;
-			long pt = 0;
-
-			@Override
-			public void handle(long ct) {
-				// tempo decorrido desde o inicio em ms
-				ct = (long) ((ct - it) / 1000000.0);
-
-				double progress = Math.min(ct / (te * 1.0), 1.0);
-				pb.setProgress(progress);
-
-				// muda a imagem a cada 200ms
-				if ((ct - pt) > 200) {
-					Image sprite;
-					String url = prefix + imageId + ".png";
-					if (!images.containsKey(url))
-						images.put(url, new Image(url, 40, 64, false, false));
-					sprite = images.get(url);
-					iv.setImage(sprite);
-
-					imageId = (imageId + 1) % 3;
-					pt = ct;
-				}
-
-				if (progress >= 1) {
-					this.stop();
-				}
-			}
-
-		}.start(); */
-
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
 

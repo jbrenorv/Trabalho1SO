@@ -173,22 +173,31 @@
             </Pane>
             <Pane prefHeight="70.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="8.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
-                  <Label layoutX="191.0" layoutY="21.0" text="Depósito" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas Bold" size="24.0" />
-                     </font>
-                  </Label>
+	               <VBox fx:id="vbDepo">
+	               	<children>
+	               	   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="8.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
+	                  <Label layoutX="191.0" layoutY="21.0" text="Depósito" textFill="WHITE">
+	                     <font>
+	                        <Font name="Consolas Bold" size="24.0" />
+	                     </font>
+	                  </Label>
+	               	</children>
+	               </VBox>
+                  
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c0619" height="90.0" layoutX="8.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                  <Label layoutX="85.0" layoutY="83.0" text="Trem" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
+               	  <VBox fx:id="vbTrem">
+               	    <children>
+	               	  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c0619" height="90.0" layoutX="8.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+	                  <Label layoutX="85.0" layoutY="83.0" text="Trem" textFill="WHITE">
+	                     <font>
+	                        <Font name="System Bold" size="24.0" />
+	                     </font>
+	                  </Label>
+               	    </children>
+               	  </VBox>
                </children>
             </Pane>
             <Pane prefHeight="240.0" prefWidth="1280.0">
