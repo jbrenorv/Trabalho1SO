@@ -58,7 +58,7 @@ public class EmpacotadorThread extends Thread {
 		while (System.nanoTime() < tempoPacote) {};
 		System.out.println(this.id + " terminou de empacotar.");
 		
-		/* long it = System.nanoTime();
+		long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
 		Label lb = (Label) node.getChildren().get(0);
@@ -99,7 +99,7 @@ public class EmpacotadorThread extends Thread {
 				}
 			}
 
-		}.start(); */
+		}.start();
 
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
@@ -111,6 +111,7 @@ public class EmpacotadorThread extends Thread {
 			System.out.println(this.id + " carregou o pacote no depósito.");
 		}
 		
+		// codigo que já tinha antes na função do empacotador
 		/* long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
