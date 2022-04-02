@@ -30,7 +30,6 @@ public class EmpacotadorThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			System.out.println("empacotador running");
 			empacotar();
 			
 			if (Semaforo.posVazias.availablePermits() == 0) {
@@ -46,24 +45,14 @@ public class EmpacotadorThread extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("não dormiu");
 			carregarPacote();
-			System.out.println("carregou");
 			Semaforo.mutex.release();
 			Semaforo.posCheias.release();
 		}
 	}
 
 	public void empacotar() {
-		System.out.println("te: " + this.te);
-		long tempoPacote = System.currentTimeMillis() + this.te;
-		System.out.println("tempoPacote:" + tempoPacote);
-		System.out.println(this.id + " começou a empacotar.");
-		while (System.currentTimeMillis() < tempoPacote) {
-			for(int i=0;i<100;i++) {};
-		};
-		System.out.println(this.id + " terminou de empacotar.");
-		
+				
 		long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
@@ -107,6 +96,11 @@ public class EmpacotadorThread extends Thread {
 
 		}.start();
 
+		long tempoPacote = System.currentTimeMillis() + this.te;
+		while (System.currentTimeMillis() < tempoPacote) {
+			for(int i=0;i<100;i++) {};
+		};
+		System.out.println(this.id + " terminou de empacotar.");
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
 	

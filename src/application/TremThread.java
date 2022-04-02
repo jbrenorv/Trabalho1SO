@@ -30,7 +30,6 @@ public class TremThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			System.out.println("trem running");
 			for (int i = 0; i < this.n; i++) {
 				if (Semaforo.posCheias.availablePermits() == 0) {
 					System.out.println("Trem dormiu!");

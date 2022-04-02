@@ -157,11 +157,13 @@ public class HomeLayoutController implements Initializable {
 		int tv = SetupDialogLayoutController.getTv();
 		
 		TremThread trem = new TremThread(vbTrem, tv, n);
+		trem.start();
 	}
 	
 	void criarDeposito() {
 		int m = SetupDialogLayoutController.getM();
 		
 		Deposito deposito = new Deposito(vbDepo, m, 0);
+//		deposito.start();
 	}
 }
