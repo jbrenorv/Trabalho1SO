@@ -10,54 +10,58 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class EmpacotadorThread extends Thread {
+public class TremThread extends Thread {
 
 	private final Pane node;
-	private final int id;
-	private final int te;
+	private final int tv;
+	private final int N;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 
-	public EmpacotadorThread(int id, Pane node, int te) {
-		super("Emp." + String.valueOf(id));
+	public TremThread(Pane node, int tv, int N) {
+		super("Trem");
 
 		node.setVisible(true);
 
 		this.node = node;
-		this.id = id;
-		this.te = te * 1000; // transforma o tempo inserido de segundos em milissegundos
+		this.tv = tv * 1000; // transforma o tempo inserido de segundos em milissegundos
+		this.N = N;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			empacotar();
+			for (int i = 0; i < this.N; i++) {
+				if (Semaforo.posCheias.availablePermits() == 0) {
+					System.out.println("Trem dormiu!");
+				}
+				try {
+					Semaforo.posCheias.acquire();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				try {
+					Semaforo.mutex.acquire();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				descarregarPacote();
+				
+				Semaforo.mutex.release();
+				Semaforo.posVazias.release();
+			}
 			
-			if (Semaforo.posCheias.availablePermits() == 0) {
-				System.out.println(this.id + " dormiu!");
-			}
-			try {
-				Semaforo.posVazias.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			try {
-				Semaforo.mutex.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			carregarPacote();
-			
-			Semaforo.mutex.release();
-			Semaforo.posCheias.release();
+			viajar();
 		}
+		
 	}
 
-	public void empacotar() {
-		long tempoPacote = System.nanoTime() + this.te;
-		System.out.println(this.id + " começou a empacotar.");
-		while (System.nanoTime() < tempoPacote) {};
-		System.out.println(this.id + " terminou de empacotar.");
+	public void descarregarPacote() {
+		if (Deposito.qtdAtual > 0) {
+			Deposito.qtdAtual--;
+			System.out.println("Trem recebeu o pacote do depósito.");
+		}
 		
+		// codigo que já tinha antes na função do empacotador
 		/* long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
@@ -78,7 +82,7 @@ public class EmpacotadorThread extends Thread {
 				// tempo decorrido desde o inicio em ms
 				ct = (long) ((ct - it) / 1000000.0);
 
-				double progress = Math.min(ct / (te * 1.0), 1.0);
+				double progress = Math.min(ct / (tv * 1.0), 1.0);
 				pb.setProgress(progress);
 
 				// muda a imagem a cada 200ms
@@ -100,17 +104,19 @@ public class EmpacotadorThread extends Thread {
 			}
 
 		}.start(); */
-
 		// TODO: adicionar codigo para executar enquanto a animacao ocorre
 	}
-	
-	public void carregarPacote() {
+
+	public void viajar() {
+		long tempoIda = System.nanoTime() + (this.tv); // viagem de ida
+		System.out.println("Trem iniciou a viagem.");
+		while (System.nanoTime() < tempoIda) {};
+		long tempoVolta = System.nanoTime() + (this.tv); // viagem de ida
+		System.out.println("Trem chegou ao destino.");
+		while (System.nanoTime() < tempoVolta) {};
+		System.out.println("Trem terminou a viagem.");
 		
-		if (Deposito.qtdAtual <= 0) {
-			Deposito.qtdAtual++;
-			System.out.println(this.id + " carregou o pacote no depósito.");
-		}
-		
+		// codigo que já tinha antes na função do empacotador
 		/* long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
@@ -131,7 +137,7 @@ public class EmpacotadorThread extends Thread {
 				// tempo decorrido desde o inicio em ms
 				ct = (long) ((ct - it) / 1000000.0);
 
-				double progress = Math.min(ct / (te * 1.0), 1.0);
+				double progress = Math.min(ct / (tv * 1.0), 1.0);
 				pb.setProgress(progress);
 
 				// muda a imagem a cada 200ms
@@ -151,10 +157,7 @@ public class EmpacotadorThread extends Thread {
 					this.stop();
 				}
 			}
-
-		}.start(); */
-
-		// TODO: adicionar codigo para executar enquanto a animacao ocorre
+		}.start();*/
 	}
-
+	// TODO: adicionar codigo para executar enquanto a animacao ocorre
 }
