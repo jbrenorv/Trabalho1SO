@@ -3,3 +3,26 @@
 .cenario {
 	-fx-background-image: url("bg.jpg");
 }
+
+.text-area .scroll-bar {
+    -fx-opacity: 0;
+}
+
+.text-area .content {
+    -fx-background-color: black;
+}
+
+.setup-pane {
+	/*-fx-background: radial-gradient(red, yellow); 054663*/
+	/*-fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , #2d638c, #040d50);*/
+	/*-fx-background-color: #040d50;*/
+	-fx-background-color: black;
+}
+
+.btn-iniciar {
+	-fx-background-color: #FFC222;
+}
+
+.btn-iniciar:hover {
+	-fx-background-color: #FFDB58;
+}

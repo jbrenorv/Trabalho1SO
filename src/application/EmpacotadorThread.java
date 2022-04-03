@@ -1,18 +1,19 @@
 package application;
 
+import static application.Main.mutexLog;
+
 import java.util.LinkedHashMap;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import static application.Main.*;
+import javafx.util.Duration;
 
 public class EmpacotadorThread extends Thread {
 
@@ -21,44 +22,86 @@ public class EmpacotadorThread extends Thread {
 	private final int id;
 	private final String nome;
 	private final int te;
+	private Label lb;
+	private ProgressBar pb;
+	private ImageView iv;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
-
-	public EmpacotadorThread(int id, Pane node, String nome, int te) {
+	
+	private final String[] urls = {
+		"/application/images/emp0.png",
+		"/application/images/emp1.png",
+		"/application/images/emp2.png",
+		"/application/images/emp3.png",
+		"/application/images/emp4.png",
+		"/application/images/emp5.png",
+		"/application/images/emp6.png",
+		"/application/images/emp7.png",
+		"/application/images/emp8.png",
+		
+		"/application/images/ind0.png",
+		"/application/images/ind1.png",
+		
+		"/application/images/vol0.png",
+		"/application/images/vol1.png",
+		
+		"/application/images/emp-dormindo.png",
+	};
+	
+	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta) {
 		super("Emp." + String.valueOf(id));
 
 		node.setVisible(true);
-		
-//		node.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
 		this.node = node;
 		this.id = id;
 		this.nome = nome;
-		this.te = te * 1000; // transforma o tempo inserido de segundos em milissegundos
 		this.taLog = ta;
+
+		// transforma o tempo inserido de segundos em milissegundos
+		this.te = te * 1000;
+		
+		lb = (Label) node.getChildren().get(0);
+		pb = (ProgressBar) node.getChildren().get(1);
+		iv = (ImageView) node.getChildren().get(2);
+		
+		for (String url : urls) {
+			images.put(url, new Image(url, 54, 114, false, false));
+		}
 	}
 
 	@Override
 	public void run() {
+		
+
 		while (true) {
 			empacotar();
 			
-			if (Semaforo.posVazias.availablePermits() == 0) {
-				System.out.println(this.nome + "(id." + this.id + ") dormiu!");
-			}
-			try {
-				Semaforo.posVazias.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			try {
-				Semaforo.mutex.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			carregarPacote();
-			Semaforo.mutex.release();
-			Semaforo.posCheias.release();
+			// ir para o deposito
+			caminhar(74, "/application/images/ind", "/application/images/ind1.png");
+			
+			// depositar caixa (REGIAO CRITICA)
+			colocarCaixaNoDeposito();
+			
+			// voltar do deposito
+			caminhar(0, "/application/images/vol", "/application/images/vol1.png");
+			
+//			if (Semaforo.posVazias.availablePermits() == 0) {
+//				System.out.println(this.nome + "(id." + this.id + ") dormiu!");
+//			}
+//			try {
+//				Semaforo.posVazias.acquire();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//			try {
+//				Semaforo.mutex.acquire();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//			carregarPacote();
+//			Semaforo.mutex.release();
+//			Semaforo.posCheias.release();
 		}
 	}
 
@@ -66,12 +109,10 @@ public class EmpacotadorThread extends Thread {
 		long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
-		Label lb = (Label) node.getChildren().get(0);
-		ProgressBar pb = (ProgressBar) node.getChildren().get(1);
-		ImageView iv = (ImageView) node.getChildren().get(2);
-
 		Platform.runLater(() -> {
-			lb.setText(this.nome);
+			lb.setText("Empacotando");
+			lb.setVisible(true);
+			pb.setVisible(true);
 		});
 
 		new AnimationTimer() {
@@ -90,8 +131,6 @@ public class EmpacotadorThread extends Thread {
 				if ((ct - pt) > 200) {
 					Image sprite;
 					String url = prefix + imageId + ".png";
-					if (!images.containsKey(url))
-						images.put(url, new Image(url, 54, 110, false, false));
 					sprite = images.get(url);
 					iv.setImage(sprite);
 
@@ -105,50 +144,75 @@ public class EmpacotadorThread extends Thread {
 			}
 
 		}.start();
-    
-    delay(it, te);
-		pb.setVisible(false);
-		updateLog("Empacotador " + (id+1) + " terminou de empacotar", taLog);
-    
 
-//		System.out.println(this.nome + "(id." + this.id + ") come�ou a empacotar.");
-//		long tempoPacote = System.currentTimeMillis() + this.te;
-//		while (System.currentTimeMillis() < tempoPacote) {
-//			for(int i=0;i<100;i++) {};
-//		};
-//		System.out.println(this.nome + "(id." + this.id + ") terminou de empacotar.");
+		delay(it, te);
+		pb.setVisible(false);
+		lb.setVisible(false);
+		updateLog("Empacotador " + (id + 1) + " terminou de empacotar", taLog);
 	}
 	
-	public void carregarPacote() {
+	private void caminhar(int y, String prefix, String url) {
+		long it = System.nanoTime();
+		long ct = System.nanoTime();
+		long pt = 0;
+		int imageId = 0;
+		Image sprite = images.get(url);
+		iv.setImage(sprite);
 		
-		if (Deposito.qtdAtual >= 0) {
-			Deposito.qtdAtual++;
-			System.out.println(this.nome + "(id." + this.id + ") carregou o dep�sito. Total: " + Deposito.qtdAtual + " pacotes carregados.");
+		Platform.runLater(() -> {
+			lb.setText("Caminhando");
+			lb.setVisible(true);
+		});
+		
+		translateAnimation(0, y);
+		
+		while (true) {
+			ct = (long) ((ct - it) / 1000000.0);
+
+			if (ct >= 2000) {
+				break;
+			}
+			
+			if ((ct - pt) > 200) {
+				url = prefix + imageId + ".png";
+				sprite = images.get(url);
+				iv.setImage(sprite);
+
+				imageId = (imageId + 1) % 2;
+				pt = ct;
+			}
+
+			ct = System.nanoTime();
 		}
 		
+		lb.setVisible(false);
 	}
-	
-	private void colocarCaixaNoDeposito() {
 
+	private void colocarCaixaNoDeposito() {
+		updateLog("Empacotador " + (id + 1) + " depositou uma caixa", taLog);
 	}
 	
-	private void voltar() {
-		
+	private void translateAnimation(int x, int y) {
+		TranslateTransition tt = new TranslateTransition(Duration.seconds(2), this.node);
+		tt.setToX(x);
+		tt.setToY(y);
+
+		tt.play();
 	}
-	
+
 	private void delay(long initialNanoTime, int durationInMillis) {
 		long ct = System.nanoTime();
 		while (true) {
 			ct = (long) ((ct - initialNanoTime) / 1000000.0);
-			
+
 			if (ct >= durationInMillis) {
 				break;
 			}
-			
+
 			ct = System.nanoTime();
 		}
 	}
-	
+
 	private void updateLog(String msg, TextArea ta) {
 		try {
 			mutexLog.acquire();
@@ -161,9 +225,10 @@ public class EmpacotadorThread extends Thread {
 			} else {
 				log = log + "\n" + msg;
 			}
-			
+
 			Platform.runLater(() -> {
 				ta.setText(log);
+				ta.appendText("");
 			});
 
 			mutexLog.release();

@@ -30,9 +30,9 @@ public class SetupDialogLayoutController implements Initializable {
 	@FXML
 	private TextField tfTempoViagem;
 
-	private static int m;
-	private static int n;
-	private static int tv;
+	private int m;
+	private int n;
+	private int tv;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -89,16 +89,16 @@ public class SetupDialogLayoutController implements Initializable {
 		stage.close();
 	}
 
-	public static int getN() {
+	public int getN() {
 		return n;
 	}
 
-	public static int getM() {
+	public int getM() {
 		return m;
 	}
 
-	public static int getTv() {
+	public int getTv() {
 		return tv;
 	}
-	
+
 }

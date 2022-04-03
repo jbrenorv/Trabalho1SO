@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeLayoutController">
@@ -24,14 +25,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -42,14 +43,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp1.png" />
                            </image>
@@ -60,14 +61,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -78,14 +79,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -96,14 +97,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -114,14 +115,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -132,14 +133,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -150,14 +151,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -168,14 +169,14 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
@@ -186,21 +187,21 @@
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
-                              <Font name="Consolas Bold" size="11.0" />
+                              <Font name="Consolas Bold" size="8.0" />
                            </font>
                         </Label>
                         <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
                            <VBox.margin>
                               <Insets bottom="1.0" top="1.0" />
                            </VBox.margin></ProgressBar>
-                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
+                        <ImageView fitHeight="114.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <Pane layoutX="8.0" layoutY="369.0" prefHeight="150.0" prefWidth="394.0">
+                  <Pane fx:id="pTrem" layoutX="8.0" layoutY="369.0" prefHeight="150.0" prefWidth="394.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -211,36 +212,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane prefHeight="70.0" prefWidth="200.0">
-               <children>
-	               <VBox fx:id="vbDepo">
-	               	<children>
-	               	   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="64.0" layoutX="8.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
-	                  <Label layoutX="191.0" layoutY="21.0" text="Depósito" textFill="WHITE">
-	                     <font>
-	                        <Font name="Consolas Bold" size="24.0" />
-	                     </font>
-	                  </Label>
-	               	</children>
-	               </VBox>
-                  
-               </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-               <children>
-               	  <VBox fx:id="vbTrem">
-               	    <children>
-	               	  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7c0619" height="90.0" layoutX="8.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-	                  <Label layoutX="85.0" layoutY="83.0" text="Trem" textFill="WHITE">
-	                     <font>
-	                        <Font name="System Bold" size="24.0" />
-	                     </font>
-	                  </Label>
-               	    </children>
-               	  </VBox>
-               </children>
-            </Pane>
-            <Pane prefHeight="240.0" prefWidth="1280.0">
+            <Pane prefHeight="200.0" prefWidth="1280.0">
                <children>
                   <HBox prefHeight="200.0" prefWidth="1280.0">
                      <children>
@@ -252,7 +224,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="tfNomeEmpacotador" layoutX="180.0" layoutY="83.0" />
-                              <Label layoutX="22.0" layoutY="82.0" text="Nome do Empacotador">
+                              <Label layoutX="22.0" layoutY="82.0" prefWidth="153.0" text="Nome do Empacotador">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -268,10 +240,11 @@
                         </Pane>
                         <Pane prefHeight="240.0" prefWidth="640.0">
                            <children>
-                              <TextArea fx:id="taLog" editable="false" prefHeight="200.0" prefWidth="640.0" wrapText="true">
-                                 <padding>
-                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-                                 </padding></TextArea>
+                              <TextArea fx:id="taLog" editable="false" focusTraversable="false" prefHeight="200.0" prefWidth="640.0" styleClass="text-area" wrapText="true">
+                                 <font>
+                                    <Font name="Consolas" size="14.0" />
+                                 </font></TextArea>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" height="198.0" layoutX="613.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" width="27.0" />
                            </children>
                         </Pane>
                      </children>
