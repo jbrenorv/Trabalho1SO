@@ -4,35 +4,48 @@ import java.util.LinkedHashMap;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import static application.Main.*;
+
 public class EmpacotadorThread extends Thread {
 
 	private final Pane node;
+	private final TextArea taLog;
 	private final int id;
 	private final int te;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
+	private String log;
 
-	public EmpacotadorThread(int id, Pane node, int te) {
+	public EmpacotadorThread(int id, int te, Pane node, TextArea ta) {
 		super("Emp." + String.valueOf(id));
 
 		node.setVisible(true);
+		
+//		node.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 
 		this.node = node;
 		this.id = id;
 		this.te = te * 1000;
+		this.taLog = ta;
 	}
 
 	@Override
 	public void run() {
 		empacotar();
+//		while(true) {
+//			colocarCaixaNoDeposito();
+//			voltar();
+//		}
 	}
 
-	public void empacotar() {
+	private void empacotar() {
 		long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
@@ -61,11 +74,11 @@ public class EmpacotadorThread extends Thread {
 					Image sprite;
 					String url = prefix + imageId + ".png";
 					if (!images.containsKey(url))
-						images.put(url, new Image(url, 40, 64, false, false));
+						images.put(url, new Image(url, 54, 110, false, false));
 					sprite = images.get(url);
 					iv.setImage(sprite);
 
-					imageId = (imageId + 1) % 3;
+					imageId = (imageId + 1) % 9;
 					pt = ct;
 				}
 
@@ -76,7 +89,50 @@ public class EmpacotadorThread extends Thread {
 
 		}.start();
 
-		// TODO: adicionar codigo para executar enquanto a animacao ocorre
+		delay(it, te);
+		pb.setVisible(false);
+		updateLog("Empacotador " + (id+1) + " terminou de empacotar", taLog);
 	}
+	
+	private void colocarCaixaNoDeposito() {
+		
+	}
+	
+	private void voltar() {
+		
+	}
+	
+	private void delay(long initialNanoTime, int durationInMillis) {
+		long ct = System.nanoTime();
+		while (true) {
+			ct = (long) ((ct - initialNanoTime) / 1000000.0);
+			
+			if (ct >= durationInMillis) {
+				break;
+			}
+			
+			ct = System.nanoTime();
+		}
+	}
+	
+	private void updateLog(String msg, TextArea ta) {
+		try {
+			mutexLog.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			log = ta.getText();
+			if (log == null) {
+				log = msg;
+			} else {
+				log = log + "\n" + msg;
+			}
+			
+			Platform.runLater(() -> {
+				ta.setText(log);
+			});
 
+			mutexLog.release();
+		}
+	}
 }

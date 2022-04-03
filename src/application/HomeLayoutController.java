@@ -80,12 +80,16 @@ public class HomeLayoutController implements Initializable {
 			});
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
+			stage.setResizable(false);
 			stage.showAndWait();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			System.out.println(setupController.getM());
+//			int a = setupController.getM();
+//			
+//			TremTread trem = new TremThread(a, ...);
+////			System.out.println();
 		}
 
 	}
@@ -100,43 +104,43 @@ public class HomeLayoutController implements Initializable {
 
 		switch (id) {
 		case 0:
-			EmpacotadorThread emp0 = new EmpacotadorThread(id, vbEmp0, te);
+			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, vbEmp0, taLog);
 			emp0.start();
 			break;
 		case 1:
-			EmpacotadorThread emp1 = new EmpacotadorThread(id, vbEmp1, te);
+			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, vbEmp1, taLog);
 			emp1.start();
 			break;
 		case 2:
-			EmpacotadorThread emp2 = new EmpacotadorThread(id, vbEmp2, te);
+			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, vbEmp2, taLog);
 			emp2.start();
 			break;
 		case 3:
-			EmpacotadorThread emp3 = new EmpacotadorThread(id, vbEmp3, te);
+			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, vbEmp3, taLog);
 			emp3.start();
 			break;
 		case 4:
-			EmpacotadorThread emp4 = new EmpacotadorThread(id, vbEmp4, te);
+			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, vbEmp4, taLog);
 			emp4.start();
 			break;
 		case 5:
-			EmpacotadorThread emp5 = new EmpacotadorThread(id, vbEmp5, te);
+			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, vbEmp5, taLog);
 			emp5.start();
 			break;
 		case 6:
-			EmpacotadorThread emp6 = new EmpacotadorThread(id, vbEmp6, te);
+			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, vbEmp6, taLog);
 			emp6.start();
 			break;
 		case 7:
-			EmpacotadorThread emp7 = new EmpacotadorThread(id, vbEmp7, te);
+			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, vbEmp7, taLog);
 			emp7.start();
 			break;
 		case 8:
-			EmpacotadorThread emp8 = new EmpacotadorThread(id, vbEmp8, te);
+			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, vbEmp8, taLog);
 			emp8.start();
 			break;
 		default:
-			EmpacotadorThread emp9 = new EmpacotadorThread(id, vbEmp9, te);
+			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, vbEmp9, taLog);
 			emp9.start();
 			break;
 		}
