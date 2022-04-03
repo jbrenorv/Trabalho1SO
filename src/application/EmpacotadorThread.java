@@ -19,11 +19,12 @@ public class EmpacotadorThread extends Thread {
 	private final Pane node;
 	private final TextArea taLog;
 	private final int id;
+	private final String nome;
 	private final int te;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
 
-	public EmpacotadorThread(int id, int te, Pane node, TextArea ta) {
+	public EmpacotadorThread(int id, Pane node, String nome, int te) {
 		super("Emp." + String.valueOf(id));
 
 		node.setVisible(true);
@@ -32,20 +33,36 @@ public class EmpacotadorThread extends Thread {
 
 		this.node = node;
 		this.id = id;
-		this.te = te * 1000;
+		this.nome = nome;
+		this.te = te * 1000; // transforma o tempo inserido de segundos em milissegundos
 		this.taLog = ta;
 	}
 
 	@Override
 	public void run() {
-		empacotar();
-//		while(true) {
-//			colocarCaixaNoDeposito();
-//			voltar();
-//		}
+		while (true) {
+			empacotar();
+			
+			if (Semaforo.posVazias.availablePermits() == 0) {
+				System.out.println(this.nome + "(id." + this.id + ") dormiu!");
+			}
+			try {
+				Semaforo.posVazias.acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			try {
+				Semaforo.mutex.acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			carregarPacote();
+			Semaforo.mutex.release();
+			Semaforo.posCheias.release();
+		}
 	}
 
-	private void empacotar() {
+	public void empacotar() {
 		long it = System.nanoTime();
 		String prefix = "/application/images/emp";
 
@@ -54,7 +71,7 @@ public class EmpacotadorThread extends Thread {
 		ImageView iv = (ImageView) node.getChildren().get(2);
 
 		Platform.runLater(() -> {
-			lb.setText("Emp...");
+			lb.setText(this.nome);
 		});
 
 		new AnimationTimer() {
@@ -88,14 +105,31 @@ public class EmpacotadorThread extends Thread {
 			}
 
 		}.start();
-
-		delay(it, te);
+    
+    delay(it, te);
 		pb.setVisible(false);
 		updateLog("Empacotador " + (id+1) + " terminou de empacotar", taLog);
+    
+
+//		System.out.println(this.nome + "(id." + this.id + ") come�ou a empacotar.");
+//		long tempoPacote = System.currentTimeMillis() + this.te;
+//		while (System.currentTimeMillis() < tempoPacote) {
+//			for(int i=0;i<100;i++) {};
+//		};
+//		System.out.println(this.nome + "(id." + this.id + ") terminou de empacotar.");
+	}
+	
+	public void carregarPacote() {
+		
+		if (Deposito.qtdAtual >= 0) {
+			Deposito.qtdAtual++;
+			System.out.println(this.nome + "(id." + this.id + ") carregou o dep�sito. Total: " + Deposito.qtdAtual + " pacotes carregados.");
+		}
+		
 	}
 	
 	private void colocarCaixaNoDeposito() {
-		
+
 	}
 	
 	private void voltar() {

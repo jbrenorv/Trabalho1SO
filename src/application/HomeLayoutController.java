@@ -30,6 +30,9 @@ public class HomeLayoutController implements Initializable {
     private TextArea taLog;
 
 	@FXML
+	private TextField tfNomeEmpacotador;
+	
+	@FXML
 	private TextField tfTempoDeEmpacotamento;
 
 	@FXML
@@ -62,6 +65,12 @@ public class HomeLayoutController implements Initializable {
 	@FXML
 	private VBox vbEmp9;
 
+	@FXML
+	private VBox vbTrem;
+	
+	@FXML
+	private VBox vbDepo;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/layouts/SetupDialogLayout.fxml"));
@@ -86,10 +95,11 @@ public class HomeLayoutController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-//			int a = setupController.getM();
-//			
-//			TremTread trem = new TremThread(a, ...);
-////			System.out.println();
+			System.out.println(setupController.getM());
+			criarTrem();
+			System.out.println("trem criado");
+			criarDeposito();
+			System.out.println("deposito criado");
 		}
 
 	}
@@ -98,49 +108,51 @@ public class HomeLayoutController implements Initializable {
 	void criarEmpacotador() {
 		int id = getId();
 
+		String nome = tfNomeEmpacotador.getText();
+		
 		//////// tratar errors
 		int te = Integer.parseInt(tfTempoDeEmpacotamento.getText());
 		//////////////////////
 
 		switch (id) {
 		case 0:
-			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, vbEmp0, taLog);
+			EmpacotadorThread emp0 = new EmpacotadorThread(id, vbEmp0, nome, te);
 			emp0.start();
 			break;
 		case 1:
-			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, vbEmp1, taLog);
+			EmpacotadorThread emp1 = new EmpacotadorThread(id, vbEmp1, nome, te);
 			emp1.start();
 			break;
 		case 2:
-			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, vbEmp2, taLog);
+			EmpacotadorThread emp2 = new EmpacotadorThread(id, vbEmp2, nome, te);
 			emp2.start();
 			break;
 		case 3:
-			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, vbEmp3, taLog);
+			EmpacotadorThread emp3 = new EmpacotadorThread(id, vbEmp3, nome, te);
 			emp3.start();
 			break;
 		case 4:
-			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, vbEmp4, taLog);
+			EmpacotadorThread emp4 = new EmpacotadorThread(id, vbEmp4, nome, te);
 			emp4.start();
 			break;
 		case 5:
-			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, vbEmp5, taLog);
+			EmpacotadorThread emp5 = new EmpacotadorThread(id, vbEmp5, nome, te);
 			emp5.start();
 			break;
 		case 6:
-			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, vbEmp6, taLog);
+			EmpacotadorThread emp6 = new EmpacotadorThread(id, vbEmp6, nome, te);
 			emp6.start();
 			break;
 		case 7:
-			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, vbEmp7, taLog);
+			EmpacotadorThread emp7 = new EmpacotadorThread(id, vbEmp7, nome, te);
 			emp7.start();
 			break;
 		case 8:
-			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, vbEmp8, taLog);
+			EmpacotadorThread emp8 = new EmpacotadorThread(id, vbEmp8, nome, te);
 			emp8.start();
 			break;
 		default:
-			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, vbEmp9, taLog);
+			EmpacotadorThread emp9 = new EmpacotadorThread(id, vbEmp9, nome, te);
 			emp9.start();
 			break;
 		}
@@ -149,5 +161,19 @@ public class HomeLayoutController implements Initializable {
 			btCriarEmpacotador.setDisable(true);
 		}
 	}
-
+	
+	void criarTrem() {
+		int n = SetupDialogLayoutController.getN();
+		int tv = SetupDialogLayoutController.getTv();
+		
+		TremThread trem = new TremThread(vbTrem, tv, n);
+		trem.start();
+	}
+	
+	void criarDeposito() {
+		int m = SetupDialogLayoutController.getM();
+		
+		Deposito deposito = new Deposito(vbDepo, m, 0);
+//		deposito.start();
+	}
 }
