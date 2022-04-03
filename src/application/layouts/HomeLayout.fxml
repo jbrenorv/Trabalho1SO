@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,165 +12,203 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeLayoutController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeLayoutController">
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="1280.0">
+            <Pane prefHeight="520.0" prefWidth="1280.0" styleClass="cenario">
                <children>
-                  <VBox fx:id="vbEmp0" layoutX="8.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp0" layoutX="8.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp1" layoutX="56.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp1" layoutX="70.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../images/emp0.png" />
+                              <Image url="@../images/emp1.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp2" layoutX="104.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp2" layoutX="132.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp3" layoutX="152.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp3" layoutX="194.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp4" layoutX="200.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp4" layoutX="256.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp5" layoutX="248.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp5" layoutX="318.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp6" layoutX="296.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp6" layoutX="380.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp7" layoutX="344.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp7" layoutX="442.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp8" layoutX="392.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp8" layoutX="504.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
-                  <VBox fx:id="vbEmp9" layoutX="440.0" layoutY="16.0" prefHeight="90.0" prefWidth="40.0" visible="false">
+                  <VBox fx:id="vbEmp9" layoutX="566.0" layoutY="16.0" prefHeight="133.0" prefWidth="54.0" visible="false">
                      <children>
                         <Label alignment="CENTER" textFill="#0094c5">
                            <font>
                               <Font name="Consolas Bold" size="11.0" />
                            </font>
                         </Label>
-                        <ProgressBar prefHeight="10.0" prefWidth="40.0" progress="0.0" />
-                        <ImageView fitHeight="64.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ProgressBar prefHeight="8.0" prefWidth="54.0" progress="0.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" top="1.0" />
+                           </VBox.margin></ProgressBar>
+                        <ImageView fitHeight="110.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
                               <Image url="@../images/emp0.png" />
                            </image>
                         </ImageView>
                      </children>
                   </VBox>
+                  <Pane layoutX="8.0" layoutY="369.0" prefHeight="150.0" prefWidth="394.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/trem-parado.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <Pane prefHeight="70.0" prefWidth="200.0">
@@ -202,9 +242,9 @@
             </Pane>
             <Pane prefHeight="240.0" prefWidth="1280.0">
                <children>
-                  <HBox prefHeight="240.0" prefWidth="1280.0">
+                  <HBox prefHeight="200.0" prefWidth="1280.0">
                      <children>
-                        <Pane prefHeight="240.0" prefWidth="640.0">
+                        <Pane prefHeight="200.0" prefWidth="640.0">
                            <children>
                               <Label alignment="CENTER" layoutX="208.0" layoutY="14.0" text="Criar Empacotador" textAlignment="CENTER">
                                  <font>
@@ -228,11 +268,10 @@
                         </Pane>
                         <Pane prefHeight="240.0" prefWidth="640.0">
                            <children>
-                              <Label layoutX="300.0" layoutY="103.0" text="Log">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
+                              <TextArea fx:id="taLog" editable="false" prefHeight="200.0" prefWidth="640.0" wrapText="true">
+                                 <padding>
+                                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                                 </padding></TextArea>
                            </children>
                         </Pane>
                      </children>
