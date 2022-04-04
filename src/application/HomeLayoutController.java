@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -30,6 +31,12 @@ public class HomeLayoutController implements Initializable {
 
 	@FXML
 	private Button btCriarEmpacotador;
+	
+	@FXML
+    private Label lbDeposito;
+	
+	@FXML
+    private Label lbTrem;
 
 	@FXML
 	private Pane pTrem;
@@ -72,6 +79,8 @@ public class HomeLayoutController implements Initializable {
 
 	@FXML
 	private VBox vbEmp9;
+	
+	private Deposito deposito;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -101,13 +110,12 @@ public class HomeLayoutController implements Initializable {
 			int tv = setupController.getTv();
 			int m = setupController.getM();
 
-			Deposito deposito = new Deposito(m, 0);
+			deposito = new Deposito(m, 0, lbDeposito);
+			Semaforo.setPosVaziasSemaphore(m);
 			System.out.println("deposito criado");
-			TremThread trem = new TremThread(pTrem, tv, n);
+			TremThread trem = new TremThread(pTrem, tv, n, deposito, lbTrem);
 			System.out.println("trem criado");
 			trem.start();
-//			criarTrem();
-//			criarDeposito();
 		}
 		
 		taLog.textProperty().addListener((ChangeListener<? super String>) new ChangeListener<Object>() {
@@ -119,11 +127,11 @@ public class HomeLayoutController implements Initializable {
 		    }
 		});
 		
-		tfNomeEmpacotador.textProperty().addListener(new ChangeListener<String>() {
+		tfTempoDeEmpacotamento.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if (!newValue.matches("\\d*")) {
-					tfNomeEmpacotador.setText(newValue.replaceAll("[^\\d]", ""));
+					tfTempoDeEmpacotamento.setText(newValue.replaceAll("[^\\d]", ""));
 				}
 			}
 		});
@@ -138,43 +146,43 @@ public class HomeLayoutController implements Initializable {
 
 		switch (id) {
 		case 0:
-			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, nome, vbEmp0, taLog);
+			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, nome, vbEmp0, taLog, deposito);
 			emp0.start();
 			break;
 		case 1:
-			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, nome, vbEmp1, taLog);
+			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, nome, vbEmp1, taLog, deposito);
 			emp1.start();
 			break;
 		case 2:
-			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, nome, vbEmp2, taLog);
+			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, nome, vbEmp2, taLog, deposito);
 			emp2.start();
 			break;
 		case 3:
-			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, nome, vbEmp3, taLog);
+			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, nome, vbEmp3, taLog, deposito);
 			emp3.start();
 			break;
 		case 4:
-			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, nome, vbEmp4, taLog);
+			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, nome, vbEmp4, taLog, deposito);
 			emp4.start();
 			break;
 		case 5:
-			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, nome, vbEmp5, taLog);
+			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, nome, vbEmp5, taLog, deposito);
 			emp5.start();
 			break;
 		case 6:
-			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, nome, vbEmp6, taLog);
+			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, nome, vbEmp6, taLog, deposito);
 			emp6.start();
 			break;
 		case 7:
-			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, nome, vbEmp7, taLog);
+			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, nome, vbEmp7, taLog, deposito);
 			emp7.start();
 			break;
 		case 8:
-			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, nome, vbEmp8, taLog);
+			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, nome, vbEmp8, taLog, deposito);
 			emp8.start();
 			break;
 		default:
-			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, nome, vbEmp9, taLog);
+			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, nome, vbEmp9, taLog, deposito);
 			emp9.start();
 			break;
 		}
@@ -183,19 +191,4 @@ public class HomeLayoutController implements Initializable {
 			btCriarEmpacotador.setDisable(true);
 		}
 	}
-
-//	void criarTrem() {
-//		int n = SetupDialogLayoutController.getN();
-//		int tv = SetupDialogLayoutController.getTv();
-//		
-//		TremThread trem = new TremThread(vbTrem, tv, n);
-//		trem.start();
-//	}
-
-//	void criarDeposito() {
-//		int m = SetupDialogLayoutController.getM();
-//		
-//		Deposito deposito = new Deposito(m, 0);
-////		deposito.start();
-//	}
 }

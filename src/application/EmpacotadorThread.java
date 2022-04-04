@@ -27,6 +27,7 @@ public class EmpacotadorThread extends Thread {
 	private ImageView iv;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
+	private Deposito deposito;
 	
 	private final String[] urls = {
 		"/application/images/emp0.png",
@@ -48,7 +49,7 @@ public class EmpacotadorThread extends Thread {
 		"/application/images/emp-dormindo.png",
 	};
 	
-	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta) {
+	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta, Deposito dep) {
 		super("Emp." + String.valueOf(id));
 
 		node.setVisible(true);
@@ -64,6 +65,8 @@ public class EmpacotadorThread extends Thread {
 		lb = (Label) node.getChildren().get(0);
 		pb = (ProgressBar) node.getChildren().get(1);
 		iv = (ImageView) node.getChildren().get(2);
+		
+		deposito = dep;
 		
 		for (String url : urls) {
 			images.put(url, new Image(url, 54, 114, false, false));
@@ -189,7 +192,30 @@ public class EmpacotadorThread extends Thread {
 	}
 
 	private void colocarCaixaNoDeposito() {
-		updateLog("Empacotador " + (id + 1) + " depositou uma caixa", taLog);
+		if (Semaforo.posVazias.availablePermits() == 0) {
+			iv.setImage(images.get("/application/images/emp-dormindo.png"));
+			updateLog("Empacotador " + (id + 1) + " dormiu", taLog);
+		}
+		
+		try {
+			Semaforo.posVazias.acquire();
+			Semaforo.mutex.acquire();
+			
+			deposito.depositar();
+			updateLog("Empacotador " + (id + 1) + " depositou uma caixa", taLog);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			Semaforo.mutex.release();
+			Semaforo.posCheias.release();
+		}
+//		try {
+//			Semaforo.mutex.acquire();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		Semaforo.mutex.release();
+//		Semaforo.posCheias.release();
 	}
 	
 	private void translateAnimation(int x, int y) {
