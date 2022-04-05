@@ -1,12 +1,11 @@
 package application;
 
-import static application.Main.mutexLog;
-
 import java.util.LinkedHashMap;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+//import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -15,13 +14,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import static application.Main.mutexHomeLayout;
+
 public class EmpacotadorThread extends Thread {
 
-	private final Pane node;
-	private final TextArea taLog;
-	private final int id;
-	private final String nome;
-	private final int te;
+	private Pane node;
+	private TextArea taLog;
+	private int id;
+	private String nome;
+	private int te;
 	private Label lb;
 	private ProgressBar pb;
 	private ImageView iv;
@@ -58,8 +59,6 @@ public class EmpacotadorThread extends Thread {
 		this.id = id;
 		this.nome = nome;
 		this.taLog = ta;
-
-		// transforma o tempo inserido de segundos em milissegundos
 		this.te = te * 1000;
 		
 		lb = (Label) node.getChildren().get(0);
@@ -76,7 +75,6 @@ public class EmpacotadorThread extends Thread {
 	@Override
 	public void run() {
 		
-
 		while (true) {
 			empacotar();
 			
@@ -88,23 +86,6 @@ public class EmpacotadorThread extends Thread {
 			
 			// voltar do deposito
 			caminhar(0, "/application/images/vol", "/application/images/vol1.png");
-			
-//			if (Semaforo.posVazias.availablePermits() == 0) {
-//				System.out.println(this.nome + "(id." + this.id + ") dormiu!");
-//			}
-//			try {
-//				Semaforo.posVazias.acquire();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//			try {
-//				Semaforo.mutex.acquire();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//			carregarPacote();
-//			Semaforo.mutex.release();
-//			Semaforo.posCheias.release();
 		}
 	}
 
@@ -114,9 +95,10 @@ public class EmpacotadorThread extends Thread {
 
 		Platform.runLater(() -> {
 			lb.setText("Empacotando");
-			lb.setVisible(true);
-			pb.setVisible(true);
 		});
+
+		lb.setVisible(true);
+		pb.setVisible(true);
 
 		new AnimationTimer() {
 			int imageId = 0;
@@ -132,10 +114,8 @@ public class EmpacotadorThread extends Thread {
 
 				// muda a imagem a cada 200ms
 				if ((ct - pt) > 200) {
-					Image sprite;
 					String url = prefix + imageId + ".png";
-					sprite = images.get(url);
-					iv.setImage(sprite);
+					setEmpacotadorImage(url);
 
 					imageId = (imageId + 1) % 9;
 					pt = ct;
@@ -149,8 +129,10 @@ public class EmpacotadorThread extends Thread {
 		}.start();
 
 		delay(it, te);
+			
 		pb.setVisible(false);
 		lb.setVisible(false);
+		
 		updateLog("Empacotador " + (id + 1) + " terminou de empacotar", taLog);
 	}
 	
@@ -159,13 +141,16 @@ public class EmpacotadorThread extends Thread {
 		long ct = System.nanoTime();
 		long pt = 0;
 		int imageId = 0;
-		Image sprite = images.get(url);
-		iv.setImage(sprite);
+
+		setEmpacotadorImage(url);
 		
-		Platform.runLater(() -> {
-			lb.setText("Caminhando");
+		if (y != 0) {
+			Platform.runLater(() -> {
+				lb.setText("Depositando");
+			});
+
 			lb.setVisible(true);
-		});
+		}
 		
 		translateAnimation(0, y);
 		
@@ -178,8 +163,7 @@ public class EmpacotadorThread extends Thread {
 			
 			if ((ct - pt) > 200) {
 				url = prefix + imageId + ".png";
-				sprite = images.get(url);
-				iv.setImage(sprite);
+				setEmpacotadorImage(url);
 
 				imageId = (imageId + 1) % 2;
 				pt = ct;
@@ -193,7 +177,7 @@ public class EmpacotadorThread extends Thread {
 
 	private void colocarCaixaNoDeposito() {
 		if (Semaforo.posVazias.availablePermits() == 0) {
-			iv.setImage(images.get("/application/images/emp-dormindo.png"));
+			setEmpacotadorImage("/application/images/emp-dormindo.png");
 			updateLog("Empacotador " + (id + 1) + " dormiu", taLog);
 		}
 		
@@ -201,21 +185,15 @@ public class EmpacotadorThread extends Thread {
 			Semaforo.posVazias.acquire();
 			Semaforo.mutex.acquire();
 			
-			deposito.depositar();
+			deposito.depositar();		
 			updateLog("Empacotador " + (id + 1) + " depositou uma caixa", taLog);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
+			
 			Semaforo.mutex.release();
 			Semaforo.posCheias.release();
-		}
-//		try {
-//			Semaforo.mutex.acquire();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		Semaforo.mutex.release();
-//		Semaforo.posCheias.release();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} 
+
 	}
 	
 	private void translateAnimation(int x, int y) {
@@ -240,24 +218,40 @@ public class EmpacotadorThread extends Thread {
 	}
 
 	private void updateLog(String msg, TextArea ta) {
+		
 		try {
-			mutexLog.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			log = ta.getText();
-			if (log == null) {
-				log = msg;
-			} else {
-				log = log + "\n" + msg;
-			}
-
+			mutexHomeLayout.acquire();
+			
 			Platform.runLater(() -> {
+				log = ta.getText();
+				if (log == null) {
+					log = msg;
+				} else {
+					log = log + "\n" + msg;
+				}
+				
 				ta.setText(log);
 				ta.appendText("");
+				
+				mutexHomeLayout.release();
 			});
 
-			mutexLog.release();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void setEmpacotadorImage(String url) {
+		try {
+			mutexHomeLayout.acquire();
+
+			iv.setImage(images.get(url));
+
+			mutexHomeLayout.release();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

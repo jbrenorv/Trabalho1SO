@@ -17,12 +17,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static List<Integer> ids;
-	public static Semaphore mutexLog;
+//	public static Semaphore mutexLog;
+	public static Semaphore mutexHomeLayout;
 
 	@Override
 	public void start(Stage stage) throws IOException {
 		
-		mutexLog = new Semaphore(1, true);
+//		mutexLog = new Semaphore(1, true);
+		mutexHomeLayout = new Semaphore(1, true);
 		ids = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 
 		Parent root = FXMLLoader.load(getClass().getResource("/application/layouts/HomeLayout.fxml"));

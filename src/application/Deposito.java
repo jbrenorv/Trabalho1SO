@@ -3,6 +3,8 @@ package application;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
+import static application.Main.mutexHomeLayout;
+
 public class Deposito {
 	// capacidade máxima do depósito
 	private int m;
@@ -29,8 +31,18 @@ public class Deposito {
 	}
 	
 	private void setStatus() {
-		Platform.runLater(() -> {
-			status.setText(qtdAtual + " / " + m);
-		});
+		
+		try {
+			mutexHomeLayout.acquire();
+			
+			Platform.runLater(() -> {
+				status.setText(qtdAtual + " / " + m);
+				mutexHomeLayout.release();
+			});
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

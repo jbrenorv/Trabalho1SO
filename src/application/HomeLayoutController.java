@@ -21,8 +21,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -34,9 +32,6 @@ public class HomeLayoutController implements Initializable {
 	
 	@FXML
     private Label lbDeposito;
-	
-	@FXML
-    private Label lbTrem;
 
 	@FXML
 	private Pane pTrem;
@@ -112,9 +107,7 @@ public class HomeLayoutController implements Initializable {
 
 			deposito = new Deposito(m, 0, lbDeposito);
 			Semaforo.setPosVaziasSemaphore(m);
-			System.out.println("deposito criado");
-			TremThread trem = new TremThread(pTrem, tv, n, deposito, lbTrem);
-			System.out.println("trem criado");
+			TremThread trem = new TremThread(pTrem, tv, n, deposito, taLog);
 			trem.start();
 		}
 		

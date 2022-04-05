@@ -208,11 +208,6 @@
                               <Image url="@../images/trem-parado.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lbTrem" layoutX="49.0" layoutY="97.0" prefHeight="17.0" prefWidth="90.0" textFill="WHITE" visible="false">
-                           <font>
-                              <Font name="Consolas Bold" size="14.0" />
-                           </font>
-                        </Label>
                      </children>
                   </Pane>
                   <Label fx:id="lbDeposito" layoutX="58.0" layoutY="322.0">
