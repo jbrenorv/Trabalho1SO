@@ -215,6 +215,56 @@
                         <Font name="Consolas Bold" size="24.0" />
                      </font>
                   </Label>
+                  <Label layoutX="32.5" layoutY="2.0" text="1" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="94.5" layoutY="2.0" text="2" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="156.5" layoutY="2.0" text="3" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="218.5" layoutY="2.0" text="4" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="280.5" layoutY="2.0" text="5" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="342.5" layoutY="2.0" text="6" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="404.5" layoutY="2.0" text="7" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="466.5" layoutY="2.0" text="8" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="528.5" layoutY="2.0" text="9" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="588.5" layoutY="2.0" text="10" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="10.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="1280.0">

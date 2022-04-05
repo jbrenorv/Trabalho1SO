@@ -1,6 +1,7 @@
 package application;
 
 import static application.Main.mutexHomeLayout;
+import static application.Main.deposito;
 
 import java.util.LinkedHashMap;
 
@@ -27,7 +28,6 @@ public class EmpacotadorThread extends Thread {
 	private ImageView iv;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
-	private Deposito deposito;
 
 	private final String[] urls = {
 		"/application/images/emp0.png",
@@ -49,8 +49,8 @@ public class EmpacotadorThread extends Thread {
 		"/application/images/emp-dormindo.png",
 	};
 
-	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta, Deposito dep) {
-		super("Emp." + String.valueOf(id));
+	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta) {
+		super("(Emp." + String.valueOf(id+1) + ") " + nome);
 
 		node.setVisible(true);
 
@@ -64,11 +64,11 @@ public class EmpacotadorThread extends Thread {
 		pb = (ProgressBar) node.getChildren().get(1);
 		iv = (ImageView) node.getChildren().get(2);
 
-		deposito = dep;
-
 		for (String url : urls) {
 			images.put(url, new Image(url, 54, 114, false, false));
 		}
+		
+		updateLog("(Emp." + String.valueOf(id+1) + ") " + nome + " criado!", taLog);
 	}
 
 	@Override
@@ -242,15 +242,7 @@ public class EmpacotadorThread extends Thread {
 	}
 
 	private void setEmpacotadorImage(String url) {
-		try {
-			mutexHomeLayout.acquire();
 
 			iv.setImage(images.get(url));
-
-			mutexHomeLayout.release();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

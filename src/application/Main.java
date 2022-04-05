@@ -18,6 +18,7 @@ public class Main extends Application {
 
 	public static List<Integer> ids;
 	public static Semaphore mutexHomeLayout;
+	public static Deposito deposito = null;
 
 	@Override
 	public void start(Stage stage) throws IOException {
@@ -38,6 +39,10 @@ public class Main extends Application {
 	public static int getId() {
 		Random random = new Random();
 		return ids.remove(random.nextInt(ids.size()));
+	}
+	
+	public static void setDeposito(Deposito d) {
+		deposito = d;
 	}
 
 	private void handleExit() {

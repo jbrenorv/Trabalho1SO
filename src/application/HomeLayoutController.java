@@ -2,6 +2,7 @@ package application;
 
 import static application.Main.getId;
 import static application.Main.ids;
+import static application.Main.setDeposito;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,7 +76,7 @@ public class HomeLayoutController implements Initializable {
 	@FXML
 	private VBox vbEmp9;
 
-	private Deposito deposito;
+//	private Deposito deposito;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -105,9 +106,9 @@ public class HomeLayoutController implements Initializable {
 			int tv = setupController.getTv();
 			int m = setupController.getM();
 
-			deposito = new Deposito(m, 0, lbDeposito);
+			setDeposito(new Deposito(m, 0, lbDeposito));
 			Semaforo.setPosVaziasSemaphore(m);
-			TremThread trem = new TremThread(pTrem, tv, n, deposito, taLog);
+			TremThread trem = new TremThread(pTrem, tv, n, taLog);
 			trem.start();
 		}
 
@@ -137,7 +138,7 @@ public class HomeLayoutController implements Initializable {
 		String nome = tfNomeEmpacotador.getText();
 		String teStr = tfTempoDeEmpacotamento.getText();
 		
-		if(teStr.isEmpty()) {
+		if (teStr.isEmpty()) {
 			return;
 		}
 		
@@ -145,43 +146,43 @@ public class HomeLayoutController implements Initializable {
 
 		switch (id) {
 		case 0:
-			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, nome, vbEmp0, taLog, deposito);
+			EmpacotadorThread emp0 = new EmpacotadorThread(id, te, nome, vbEmp0, taLog);
 			emp0.start();
 			break;
 		case 1:
-			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, nome, vbEmp1, taLog, deposito);
+			EmpacotadorThread emp1 = new EmpacotadorThread(id, te, nome, vbEmp1, taLog);
 			emp1.start();
 			break;
 		case 2:
-			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, nome, vbEmp2, taLog, deposito);
+			EmpacotadorThread emp2 = new EmpacotadorThread(id, te, nome, vbEmp2, taLog);
 			emp2.start();
 			break;
 		case 3:
-			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, nome, vbEmp3, taLog, deposito);
+			EmpacotadorThread emp3 = new EmpacotadorThread(id, te, nome, vbEmp3, taLog);
 			emp3.start();
 			break;
 		case 4:
-			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, nome, vbEmp4, taLog, deposito);
+			EmpacotadorThread emp4 = new EmpacotadorThread(id, te, nome, vbEmp4, taLog);
 			emp4.start();
 			break;
 		case 5:
-			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, nome, vbEmp5, taLog, deposito);
+			EmpacotadorThread emp5 = new EmpacotadorThread(id, te, nome, vbEmp5, taLog);
 			emp5.start();
 			break;
 		case 6:
-			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, nome, vbEmp6, taLog, deposito);
+			EmpacotadorThread emp6 = new EmpacotadorThread(id, te, nome, vbEmp6, taLog);
 			emp6.start();
 			break;
 		case 7:
-			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, nome, vbEmp7, taLog, deposito);
+			EmpacotadorThread emp7 = new EmpacotadorThread(id, te, nome, vbEmp7, taLog);
 			emp7.start();
 			break;
 		case 8:
-			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, nome, vbEmp8, taLog, deposito);
+			EmpacotadorThread emp8 = new EmpacotadorThread(id, te, nome, vbEmp8, taLog);
 			emp8.start();
 			break;
 		default:
-			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, nome, vbEmp9, taLog, deposito);
+			EmpacotadorThread emp9 = new EmpacotadorThread(id, te, nome, vbEmp9, taLog);
 			emp9.start();
 			break;
 		}

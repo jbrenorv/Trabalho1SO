@@ -1,6 +1,7 @@
 package application;
 
 import static application.Main.mutexHomeLayout;
+import static application.Main.deposito;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -22,7 +23,6 @@ public class TremThread extends Thread {
 	private int n;
 	private ImageView iv;
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
-	private Deposito deposito;
 	private String log;
 	private TextArea taLog;
 
@@ -36,7 +36,7 @@ public class TremThread extends Thread {
 		"/application/images/trem-voltando2.png",
 	};
 
-	public TremThread(Pane node, int tv, int n, Deposito dep, TextArea ta) {
+	public TremThread(Pane node, int tv, int n, TextArea ta) {
 		super("Trem");
 
 		this.node = node;
@@ -45,7 +45,6 @@ public class TremThread extends Thread {
 		this.taLog = ta;
 
 		iv = (ImageView) node.getChildren().get(0);
-		deposito = dep;
 
 		for (String url : urls) {
 			images.put(url, new Image(url, 400, 150, false, false));
@@ -160,16 +159,8 @@ public class TremThread extends Thread {
 	}
 
 	private void setTrainImage(String url) {
-		try {
-			mutexHomeLayout.acquire();
 
 			iv.setImage(images.get(url));
-
-			mutexHomeLayout.release();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
