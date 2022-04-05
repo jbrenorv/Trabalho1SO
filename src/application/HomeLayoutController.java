@@ -29,7 +29,7 @@ public class HomeLayoutController implements Initializable {
 
 	@FXML
 	private Button btCriarEmpacotador;
-	
+
 	@FXML
     private Label lbDeposito;
 
@@ -74,7 +74,7 @@ public class HomeLayoutController implements Initializable {
 
 	@FXML
 	private VBox vbEmp9;
-	
+
 	private Deposito deposito;
 
 	@Override
@@ -110,8 +110,8 @@ public class HomeLayoutController implements Initializable {
 			TremThread trem = new TremThread(pTrem, tv, n, deposito, taLog);
 			trem.start();
 		}
-		
-		taLog.textProperty().addListener((ChangeListener<? super String>) new ChangeListener<Object>() {
+
+		taLog.textProperty().addListener(new ChangeListener<Object>() {
 		    @Override
 		    public void changed(ObservableValue<?> observable, Object oldValue,
 		            Object newValue) {
@@ -119,7 +119,7 @@ public class HomeLayoutController implements Initializable {
 		        //use Double.MIN_VALUE to scroll to the top
 		    }
 		});
-		
+
 		tfTempoDeEmpacotamento.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -135,7 +135,13 @@ public class HomeLayoutController implements Initializable {
 	void criarEmpacotador() {
 		int id = getId();
 		String nome = tfNomeEmpacotador.getText();
-		int te = Integer.parseInt(tfTempoDeEmpacotamento.getText());
+		String teStr = tfTempoDeEmpacotamento.getText();
+		
+		if(teStr.isEmpty()) {
+			return;
+		}
+		
+		int te = Integer.parseInt(teStr);
 
 		switch (id) {
 		case 0:

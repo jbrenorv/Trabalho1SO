@@ -1,11 +1,12 @@
 package application;
 
+import static application.Main.mutexHomeLayout;
+
 import java.util.LinkedHashMap;
 
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-//import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -13,8 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-
-import static application.Main.mutexHomeLayout;
 
 public class EmpacotadorThread extends Thread {
 
@@ -29,7 +28,7 @@ public class EmpacotadorThread extends Thread {
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
 	private Deposito deposito;
-	
+
 	private final String[] urls = {
 		"/application/images/emp0.png",
 		"/application/images/emp1.png",
@@ -40,16 +39,16 @@ public class EmpacotadorThread extends Thread {
 		"/application/images/emp6.png",
 		"/application/images/emp7.png",
 		"/application/images/emp8.png",
-		
+
 		"/application/images/ind0.png",
 		"/application/images/ind1.png",
-		
+
 		"/application/images/vol0.png",
 		"/application/images/vol1.png",
-		
+
 		"/application/images/emp-dormindo.png",
 	};
-	
+
 	public EmpacotadorThread(int id, int te, String nome, Pane node, TextArea ta, Deposito dep) {
 		super("Emp." + String.valueOf(id));
 
@@ -60,13 +59,13 @@ public class EmpacotadorThread extends Thread {
 		this.nome = nome;
 		this.taLog = ta;
 		this.te = te * 1000;
-		
+
 		lb = (Label) node.getChildren().get(0);
 		pb = (ProgressBar) node.getChildren().get(1);
 		iv = (ImageView) node.getChildren().get(2);
-		
+
 		deposito = dep;
-		
+
 		for (String url : urls) {
 			images.put(url, new Image(url, 54, 114, false, false));
 		}
@@ -74,16 +73,16 @@ public class EmpacotadorThread extends Thread {
 
 	@Override
 	public void run() {
-		
+
 		while (true) {
 			empacotar();
-			
+
 			// ir para o deposito
 			caminhar(74, "/application/images/ind", "/application/images/ind1.png");
-			
+
 			// depositar caixa (REGIAO CRITICA)
 			colocarCaixaNoDeposito();
-			
+
 			// voltar do deposito
 			caminhar(0, "/application/images/vol", "/application/images/vol1.png");
 		}
@@ -129,13 +128,13 @@ public class EmpacotadorThread extends Thread {
 		}.start();
 
 		delay(it, te);
-			
+
 		pb.setVisible(false);
 		lb.setVisible(false);
-		
+
 		updateLog("Empacotador " + (id + 1) + " terminou de empacotar", taLog);
 	}
-	
+
 	private void caminhar(int y, String prefix, String url) {
 		long it = System.nanoTime();
 		long ct = System.nanoTime();
@@ -143,7 +142,7 @@ public class EmpacotadorThread extends Thread {
 		int imageId = 0;
 
 		setEmpacotadorImage(url);
-		
+
 		if (y != 0) {
 			Platform.runLater(() -> {
 				lb.setText("Depositando");
@@ -151,16 +150,16 @@ public class EmpacotadorThread extends Thread {
 
 			lb.setVisible(true);
 		}
-		
+
 		translateAnimation(0, y);
-		
+
 		while (true) {
 			ct = (long) ((ct - it) / 1000000.0);
 
 			if (ct >= 2000) {
 				break;
 			}
-			
+
 			if ((ct - pt) > 200) {
 				url = prefix + imageId + ".png";
 				setEmpacotadorImage(url);
@@ -171,7 +170,7 @@ public class EmpacotadorThread extends Thread {
 
 			ct = System.nanoTime();
 		}
-		
+
 		lb.setVisible(false);
 	}
 
@@ -180,22 +179,22 @@ public class EmpacotadorThread extends Thread {
 			setEmpacotadorImage("/application/images/emp-dormindo.png");
 			updateLog("Empacotador " + (id + 1) + " dormiu", taLog);
 		}
-		
+
 		try {
 			Semaforo.posVazias.acquire();
 			Semaforo.mutex.acquire();
-			
-			deposito.depositar();		
+
+			deposito.depositar();
 			updateLog("Empacotador " + (id + 1) + " depositou uma caixa", taLog);
-			
+
 			Semaforo.mutex.release();
 			Semaforo.posCheias.release();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		} 
+		}
 
 	}
-	
+
 	private void translateAnimation(int x, int y) {
 		TranslateTransition tt = new TranslateTransition(Duration.seconds(2), this.node);
 		tt.setToX(x);
@@ -218,10 +217,10 @@ public class EmpacotadorThread extends Thread {
 	}
 
 	private void updateLog(String msg, TextArea ta) {
-		
+
 		try {
 			mutexHomeLayout.acquire();
-			
+
 			Platform.runLater(() -> {
 				log = ta.getText();
 				if (log == null) {
@@ -229,10 +228,10 @@ public class EmpacotadorThread extends Thread {
 				} else {
 					log = log + "\n" + msg;
 				}
-				
+
 				ta.setText(log);
 				ta.appendText("");
-				
+
 				mutexHomeLayout.release();
 			});
 
@@ -241,7 +240,7 @@ public class EmpacotadorThread extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void setEmpacotadorImage(String url) {
 		try {
 			mutexHomeLayout.acquire();
