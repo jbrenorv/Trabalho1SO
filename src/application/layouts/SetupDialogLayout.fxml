@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="270.0" prefWidth="480.0" styleClass="setup-pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SetupDialogLayoutController">
    <children>
-      <Button fx:id="btnIniciar" layoutX="192.0" layoutY="214.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="42.0" prefWidth="97.0" styleClass="btn" text="Iniciar">
+      <Button fx:id="btnIniciar" layoutX="192.0" layoutY="214.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="42.0" prefWidth="97.0" styleClass="btn" text="Iniciar" textFill="#4c4c4c">
          <font>
             <Font name="Consolas Bold" size="18.0" />
          </font>

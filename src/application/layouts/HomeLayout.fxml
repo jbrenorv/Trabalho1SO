@@ -290,7 +290,7 @@
                                     <Font name="Consolas Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btCriarEmpacotador" layoutX="281.0" layoutY="145.0" mnemonicParsing="false" onAction="#criarEmpacotador" prefHeight="41.0" prefWidth="78.0" styleClass="btn" text="Criar">
+                              <Button fx:id="btCriarEmpacotador" layoutX="281.0" layoutY="145.0" mnemonicParsing="false" onAction="#criarEmpacotador" prefHeight="41.0" prefWidth="78.0" styleClass="btn" text="Criar" textFill="#4c4c4c">
                                  <font>
                                     <Font name="Consolas Bold" size="18.0" />
                                  </font></Button>
