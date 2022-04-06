@@ -76,8 +76,6 @@ public class HomeLayoutController implements Initializable {
 	@FXML
 	private VBox vbEmp9;
 
-//	private Deposito deposito;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/layouts/SetupDialogLayout.fxml"));
@@ -116,7 +114,8 @@ public class HomeLayoutController implements Initializable {
 		    @Override
 		    public void changed(ObservableValue<?> observable, Object oldValue,
 		            Object newValue) {
-		    	taLog.setScrollTop(Double.MAX_VALUE); //this will scroll to the bottom
+		    	//this will scroll to the bottom
+		    	taLog.setScrollTop(Double.MAX_VALUE);
 		        //use Double.MIN_VALUE to scroll to the top
 		    }
 		});

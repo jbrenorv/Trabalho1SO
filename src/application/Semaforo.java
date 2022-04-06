@@ -4,9 +4,11 @@ import java.util.concurrent.Semaphore;
 
 public class Semaforo {
 	
-	public static Semaphore posVazias = null; // quantidade de posições vazias no depósito
+	// quantidade de posições vazias no depósito
+	public static Semaphore posVazias = null;
 	
-	public static Semaphore posCheias = new Semaphore(0); // quantidade de posições preenchidas no depósito
+	// quantidade de posições preenchidas no depósito
+	public static Semaphore posCheias = new Semaphore(0);
 	
 	public static Semaphore mutex = new Semaphore(1);
 	
