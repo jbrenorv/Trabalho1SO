@@ -8,3 +8,8 @@ Aprendendo sobre threads e semáfaros.
 ```bash
 --module-path <javafx-sdk-path>/lib --add-modules javafx.controls,javafx.fxml,javafx.media
 ```
+
+## How to run exported .jar
+```bash
+java --module-path <javafx-sdk-path>/lib --add-modules javafx.controls,javafx.fxml,javafx.media -jar <jar-name>.jar
+```
