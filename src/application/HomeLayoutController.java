@@ -33,6 +33,9 @@ public class HomeLayoutController implements Initializable {
 
 	@FXML
     private Label lbDeposito;
+	
+	@FXML
+    private Label lbTrem;
 
 	@FXML
 	private Pane pTrem;
@@ -106,7 +109,7 @@ public class HomeLayoutController implements Initializable {
 
 			setDeposito(new Deposito(m, 0, lbDeposito));
 			Semaforo.setPosVaziasSemaphore(m);
-			TremThread trem = new TremThread(pTrem, tv, n, taLog);
+			TremThread trem = new TremThread(pTrem, tv, n, taLog, lbTrem);
 			trem.start();
 		}
 

@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +26,8 @@ public class TremThread extends Thread {
 	private LinkedHashMap<String, Image> images = new LinkedHashMap<>();
 	private String log;
 	private TextArea taLog;
+	private Label lbTrem;
+	private int qtdAtual = 0;
 
 	private final String[] urls = {
 		"/application/images/trem-parado.png",
@@ -36,13 +39,14 @@ public class TremThread extends Thread {
 		"/application/images/trem-voltando2.png",
 	};
 
-	public TremThread(Pane node, int tv, int n, TextArea ta) {
+	public TremThread(Pane node, int tv, int n, TextArea ta, Label lb) {
 		super("Trem");
 
 		this.node = node;
 		this.tv = tv * 1000;
 		this.n = n;
 		this.taLog = ta;
+		this.lbTrem = lb;
 
 		iv = (ImageView) node.getChildren().get(0);
 
@@ -61,6 +65,7 @@ public class TremThread extends Thread {
 
 		while (true) {
 			
+			lbTrem.setVisible(true);
 			updateLog("Trem sendo carregado", taLog);
 			for (int i = 0; i < n; i++) {
 				if (Semaforo.posCheias.availablePermits() == 0) {
@@ -72,6 +77,8 @@ public class TremThread extends Thread {
 					Semaforo.mutex.acquire();
 
 					deposito.retirar();
+					qtdAtual++;
+					setStatus();
 
 					Semaforo.mutex.release();
 					Semaforo.posVazias.release();
@@ -85,7 +92,9 @@ public class TremThread extends Thread {
 
 			updateLog("Trem indo para a estacao B", taLog);
 			viajar(870, "/application/images/trem-indo", "/application/images/trem-indo0.png");
-
+			
+			lbTrem.setVisible(false);
+			qtdAtual = 0;
 			updateLog("Trem voltando para a estacao A", taLog);
 			viajar(0, "/application/images/trem-voltando", "/application/images/trem-voltando0.png");
 
@@ -161,6 +170,22 @@ public class TremThread extends Thread {
 	private void setTrainImage(String url) {
 
 			iv.setImage(images.get(url));
+	}
+	
+	private void setStatus() {
+			
+		try {
+			mutexHomeLayout.acquire();
+			
+			Platform.runLater(() -> {
+				lbTrem.setText(qtdAtual + " / " + n);
+				mutexHomeLayout.release();
+			});
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
