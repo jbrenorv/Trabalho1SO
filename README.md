@@ -1,5 +1,5 @@
 # Trabalho1SO
-Aprendendo sobre threads e semáfaros.
+Aprendendo sobre threads e semáforos.
 
 ## Links úteis
 [Download JavaFx SDK](https://gluonhq.com/products/javafx/)
